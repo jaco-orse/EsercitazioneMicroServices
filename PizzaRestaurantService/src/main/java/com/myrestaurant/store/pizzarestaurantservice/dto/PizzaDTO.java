@@ -16,6 +16,6 @@ public class PizzaDTO {
     private Long id;
     private String name;
     private boolean favorite;
-    private Set<Topping> toppings = new HashSet<Topping>();
+    private Set<ToppingDTO> toppings = new HashSet<ToppingDTO>();
 
 }
