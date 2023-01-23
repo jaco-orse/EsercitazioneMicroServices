@@ -20,6 +20,14 @@ public class RestaurantControllerImpl implements RestaurantController {
     private final RestaurantService restaurantService;
 
     @Override
+    @PostMapping("/addPizzas")
+    @ResponseStatus(HttpStatus.CREATED)
+    public RestaurantDTO addPizzasToRestaurant(@RequestBody RestaurantDTO rDTO){
+        Restaurant restaurant = restaurantMapper.asEntity(rDTO);
+        return restaurantMapper.asDTO(restaurantService.addPizzasToRestaurant(restaurant));
+    }
+
+    @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RestaurantDTO save(RestaurantDTO restaurantDTO) {
