@@ -1,5 +1,6 @@
 package com.myrestaurant.store.pizzarestaurantservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.HashSet;
@@ -14,5 +15,6 @@ public class DriverDTO {
 
     private Long id;
     private String name;
-    private Set<RestaurantDTO> restaurants = new HashSet<>();
+
+    //private Set<RestaurantDTO> restaurants = new HashSet<>();
 }

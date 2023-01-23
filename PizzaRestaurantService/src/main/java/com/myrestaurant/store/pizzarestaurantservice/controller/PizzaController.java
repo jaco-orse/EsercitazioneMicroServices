@@ -10,6 +10,9 @@ import java.util.List;
 
 @Api(tags = "Pizza API") //tag di swagger
 public interface PizzaController {
+    @ApiOperation("find Pizza by Restaurant Id")
+    public List<PizzaDTO> findPizzaByRestaurant(@PathVariable("id") Long id );
+
     @ApiOperation("Add new pizza") //tag di swagger
     public PizzaDTO save(@RequestBody PizzaDTO pizzaDTO);
 
