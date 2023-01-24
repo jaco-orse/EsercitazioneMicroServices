@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: PIZZA-SERVICE
+  datasource:
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/data/PizzaMicroServiceDB;AUTO_SERVER=TRUE
+    username: sa
+    password: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+
