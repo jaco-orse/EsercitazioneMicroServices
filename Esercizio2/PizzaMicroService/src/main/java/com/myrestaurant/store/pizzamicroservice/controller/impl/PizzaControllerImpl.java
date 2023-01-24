@@ -19,14 +19,14 @@ public class PizzaControllerImpl implements PizzaController {
     private final PizzaService pizzaService;// # funziona con RequiredArgConstructor
     private final PizzaMapper pizzaMapper;// # funziona con RequiredArgConstructor
 
-    /*
+
     @Override
     @GetMapping("/restaurant/{id}")
     public List<PizzaDTO> findPizzaByRestaurant(@PathVariable("id") Long restaurantId) {
         List<Pizza> pizzas = pizzaService.findByRestaurantId(restaurantId);
         return pizzaMapper.asDTOList(pizzas);
     }
-*/
+
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

@@ -1,6 +1,7 @@
 package com.myrestaurant.store.pizzamicroservice.controller;
 
 import com.myrestaurant.store.pizzamicroservice.dto.PizzaDTO;
+import com.myrestaurant.store.pizzamicroservice.model.Pizza;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,8 +11,8 @@ import java.util.List;
 
 @Api(tags = "Pizza API") //tag di swagger
 public interface PizzaController {
-   // @ApiOperation("find Pizza by Restaurant Id")
-    //public List<PizzaDTO> findPizzaByRestaurant(@PathVariable("id") Long id );
+    @ApiOperation("find Pizza by Restaurant Id")
+    public List<PizzaDTO> findPizzaByRestaurant(@PathVariable("id") Long id );
 
     @ApiOperation("Add new pizza") //tag di swagger
     public PizzaDTO save(@RequestBody PizzaDTO pizzaDTO);
@@ -27,5 +28,6 @@ public interface PizzaController {
 
     @ApiOperation("Update pizza by Id")
     public PizzaDTO update(@PathVariable("id") Long id, @RequestBody PizzaDTO pizzaDTO);
+
 
 }

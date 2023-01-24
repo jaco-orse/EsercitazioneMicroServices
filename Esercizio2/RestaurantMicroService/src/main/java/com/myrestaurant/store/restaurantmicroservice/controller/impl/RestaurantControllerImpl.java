@@ -7,10 +7,14 @@ import com.myrestaurant.store.restaurantmicroservice.mapper.RestaurantMapper;
 import com.myrestaurant.store.restaurantmicroservice.model.Restaurant;
 import com.myrestaurant.store.restaurantmicroservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/restaurants")
 @RequiredArgsConstructor
@@ -18,7 +22,10 @@ public class RestaurantControllerImpl implements RestaurantController {
 
     private final RestaurantMapper restaurantMapper;
     private final RestaurantService restaurantService;
-
+    //private String pizzaServiceUrl = "http://localhost:9090/api/pizzas/restaurant";
+    // meglio aggiungere l'url nel properties.yaml
+    @Value("${app.pizza-service-url}")
+    private String pizzaServiceUrl;
 
     /*
     @Override
@@ -28,6 +35,14 @@ public class RestaurantControllerImpl implements RestaurantController {
         Restaurant restaurant = restaurantMapper.asEntity(rDTO);
         return restaurantMapper.asDTO(restaurantService.addPizzasToRestaurant(restaurant));
     }*/
+
+
+    @Override
+    @GetMapping("/pizzas/{id}")
+    public List<Object> getPizzasByRestaurant(@PathVariable("id") Long restaurantId) {
+        RestTemplate restTemplate = new RestTemplate();
+        return List.of(Objects.requireNonNull(restTemplate.getForObject(pizzaServiceUrl + "/" + restaurantId, Object[].class)));
+    }
 
     @Override
     @PostMapping

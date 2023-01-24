@@ -1,12 +1,15 @@
 package com.myrestaurant.store.pizzamicroservice.service.Impl;
 
 import com.myrestaurant.store.pizzamicroservice.dao.PizzaRepository;
+import com.myrestaurant.store.pizzamicroservice.dao.RestaurantIdsRepository;
 import com.myrestaurant.store.pizzamicroservice.model.Pizza;
+import com.myrestaurant.store.pizzamicroservice.model.RestaurantIds;
 import com.myrestaurant.store.pizzamicroservice.service.PizzaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +22,7 @@ public class PizzaServiceImpl implements PizzaService {
     // mettendo final e il requiredArgsConstr.
     // @reqArgConst crea un constructor con tutti gli attributi final
     private final PizzaRepository repository;
+    private final RestaurantIdsRepository restaurantIDrepsitory;
 
     @Override
     public Pizza save(Pizza entity) {
@@ -52,6 +56,18 @@ public class PizzaServiceImpl implements PizzaService {
             return save(entity);
         }
         return null;
+    }
+
+    @Override
+    public List<Pizza> findByRestaurantId(Long restaurantId) {
+        List<RestaurantIds> ids = restaurantIDrepsitory.findByRestaurantId(restaurantId);
+        //crea la lista di pizze che dovranno essere ritornate
+        List<Pizza> pizzas = new ArrayList<>(ids.size());
+        //ciclo per popolare la lista di pizze
+        for(RestaurantIds element : ids){
+            pizzas.add(repository.findById(element.getPizzaId()).get());
+        }
+        return pizzas;
     }
 /*
     @Override

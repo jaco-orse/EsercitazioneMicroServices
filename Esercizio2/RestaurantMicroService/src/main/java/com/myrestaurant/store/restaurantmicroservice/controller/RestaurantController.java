@@ -16,6 +16,8 @@ public interface RestaurantController {
     @ApiOperation("add Pizza to Restaurant")
     public RestaurantDTO addPizzasToRestaurant(@RequestBody RestaurantDTO rDTO);
      */
+    @ApiOperation("Find all pizzas by restaurant id")
+    public List<Object> getPizzasByRestaurant(@PathVariable("id") Long restaurantId);
 
     @ApiOperation("Add new restaurant") //tag di swagger
     public RestaurantDTO save(@RequestBody RestaurantDTO restaurantDTO);
