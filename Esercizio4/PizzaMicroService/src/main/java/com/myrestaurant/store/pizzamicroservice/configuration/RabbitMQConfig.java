@@ -1,4 +1,4 @@
-package com.myrestaurant.store.restaurantmicroservice.configuration;
+package com.myrestaurant.store.pizzamicroservice.configuration;
 
 
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -19,31 +19,16 @@ import org.springframework.retry.interceptor.RetryOperationsInterceptor;
 @Configuration
 public class RabbitMQConfig {
     private final CachingConnectionFactory cachingConnectionFactory;
-    @Value("${app.rabbitmq.add-pizzas-routingkey}")
-    private String addPizzasToRestaurantRoutingKey;
     @Value("${app.rabbitmq.pizzas-added-routingkey}")
     private String pizzasToRestaurantAddedRoutingKey;
-
-    @Value("${app.rabbitmq.notify-pizzas-added-to-restaurant-routingkey}")
-    private String notifyPizzasAddedToRestaurantRoutingKey;
 
     public RabbitMQConfig(CachingConnectionFactory cachingConnectionFactory) {
         this.cachingConnectionFactory = cachingConnectionFactory;
     }
 
     @Bean
-    public Queue addPizzasToRestaurantQueue() {
-        return QueueBuilder.durable(addPizzasToRestaurantRoutingKey)
-                .build();
-    }
-    @Bean
     public Queue pizzasToRestaurantAddedQueue() {
         return QueueBuilder.durable(pizzasToRestaurantAddedRoutingKey)
-                .build();
-    }
-    @Bean
-    public Queue notifyPizzasAddedToRestaurantQueue() {
-        return QueueBuilder.durable(notifyPizzasAddedToRestaurantRoutingKey)
                 .build();
     }
 

@@ -24,25 +24,24 @@ public class RestaurantControllerImpl implements RestaurantController {
 
     private final RestaurantMapper restaurantMapper;
     private final RestaurantService restaurantService;
-    private final RabbitTemplate rabbitTemplate;
 
     @Value("${app.pizza-service-url}")
     private String pizzaServiceUrl;
     //private String pizzaServiceUrl = "http://localhost:9090/api/pizzas/restaurant";
     // meglio aggiungere l'url nel properties.yaml
 
-    @Value("${app.rabbitmq.routingkey}")
-    private String routingKey;
+
 
 
     @Override
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("addPizzas")
     public List<Object> addPizzaToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS){
-        RestTemplate restTemplate = new RestTemplate();
-        List<Object> result =List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS , Object[].class)));
-        rabbitTemplate.convertAndSend("",routingKey, "Added no. "+result.size()+" pizzas");
-        return result;
+        //RestTemplate restTemplate = new RestTemplate();
+        //List<Object> result =List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS , Object[].class)));
+        //return result;
+        restaurantService.addPizzasToRestaurant(restaurantIdsDTOS);
+        return null;
     }
 
     @Override

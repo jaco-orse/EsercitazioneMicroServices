@@ -6,6 +6,8 @@ import com.myrestaurant.store.pizzamicroservice.model.Pizza;
 import com.myrestaurant.store.pizzamicroservice.model.RestaurantIds;
 import com.myrestaurant.store.pizzamicroservice.service.PizzaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,15 @@ public class PizzaServiceImpl implements PizzaService {
     // @reqArgConst crea un constructor con tutti gli attributi final
     private final PizzaRepository repository;
     private final RestaurantIdsRepository restaurantIDrepsitory;
+    private final RabbitTemplate rabbitTemplate;
+    @Value("${app.rabbitmq.pizzas-added-routingkey}")
+    private String pizzasToRestaurantAddedRoutingKey;
+
+    @Value("${app.rabbitmq.notify-pizzas-added-to-restaurant-routingkey}")
+    private String notifyPizzasAddedToRestaurantRoutingKey;
+
+
+
 
     @Override
     public Pizza save(Pizza entity) {
@@ -77,6 +88,9 @@ public class PizzaServiceImpl implements PizzaService {
             pizzas.add(repository.findById(element.getPizzaId()).get());
         }
         List<RestaurantIds> result = restaurantIDrepsitory.saveAll(restaurantIds);
+        rabbitTemplate.convertAndSend("", pizzasToRestaurantAddedRoutingKey,pizzas);
+        String message = "Added n." + pizzas.size() + " pizzas !!";
+        rabbitTemplate.convertAndSend("", notifyPizzasAddedToRestaurantRoutingKey,message);
         return pizzas;
     }
 }

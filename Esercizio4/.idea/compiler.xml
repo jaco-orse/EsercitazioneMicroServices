@@ -8,7 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="NotificationService" />
       </profile>
-      <profile name="Annotation profile for RestaurantMicroService" enabled="true">
+      <profile name="Annotation profile for PizzaMicroService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
