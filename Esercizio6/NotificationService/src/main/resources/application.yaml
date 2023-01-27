@@ -5,4 +5,6 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888/config
   profiles:
-    active: sms # profilo usato dal Listerner Implementation
+    active: sms, email
+    # profilo usato dal Listerner Implementation
+    # con più profili, risppnde solo uno alla volta, o email o sms alternati
