@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: NOTIFICATION-SERVICE
+  #Le proprieta di configurazione sono state spostate al service Config
+  config:
+    import: optional:configserver:http://localhost:8888/config
+  profiles:
+    active: sms, email
+    # profilo usato dal Listerner Implementation
+    # con più profili, risppnde solo uno alla volta, o email o sms alternati
