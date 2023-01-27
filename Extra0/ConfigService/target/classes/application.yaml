@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: CONFIG-SERVICE
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://D:/NTTacademy/git_repository_course_final_part/EsercitazioneMicroServices/Esercizio6/ConfigRepo
+          # per uri usiamo un file locale al progetto
+          # NB: la cartella deve essere una cartella git, altrimenti non funzica
+          clone-on-start: true # migliorare le prestazioni se il file � gia stato caricato
+
+server:
+  port: 8888
+  servlet:
+    context-path: /config
