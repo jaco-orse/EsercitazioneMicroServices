@@ -1,0 +1,4 @@
+1-Eureka server e client per registrare i microservizi su eureka server
+2-Gateway per connettersi al'eureka server e ottenere in auomatico gli indirizzo corretti.
+
+3- per chiamare i microServ basta chiamare il gateway( default 8080 )
