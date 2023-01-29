@@ -27,6 +27,7 @@ public class PizzaControllerImpl implements PizzaController {
     @Override
     @PostMapping("/restaurant")
     public List<PizzaDTO> addPizzasToRestaurant(List<RestaurantIdsDTO> restaurantIdsDTOS) {
+        System.out.println("Sync method to add pizzas");
         List<RestaurantIds> restaurantIds = restaurantIdsMapper.asEntityList(restaurantIdsDTOS);
         return pizzaMapper.asDTOList(pizzaService.addPizzasToRestaurant(restaurantIds));
     }

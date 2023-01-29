@@ -35,9 +35,13 @@ public class RestaurantControllerImpl implements RestaurantController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("addPizzas")
     public List<Object> addPizzaToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS){
+
+        //CHIAMATA SINCRONA
         //RestTemplate restTemplate = new RestTemplate();
         //List<Object> result =List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS , Object[].class)));
         //return result;
+
+        //CHIAMATA ASINCRONA con rabbitMQ
         restaurantService.addPizzasToRestaurant(restaurantIdsDTOS);
         return null;
     }
