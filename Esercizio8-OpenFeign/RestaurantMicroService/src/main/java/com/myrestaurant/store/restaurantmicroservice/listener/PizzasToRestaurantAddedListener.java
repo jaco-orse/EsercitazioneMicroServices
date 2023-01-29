@@ -14,7 +14,7 @@ public class PizzasToRestaurantAddedListener {
 
     @RabbitListener(queues = {"${app.rabbitmq.pizzas-added-routingkey}"})
     public void onPizzasToRestaurantAdded(List<Object> pizzas){
-        log.info("Into onPizzasToRestaurantAdded method --> Now do everything!!!!!!!!!!!!!!!!!!!!");
+        log.info("Restaurant Listener --> Into onPizzasToRestaurantAdded method!");
         for(Object pizza : pizzas){
             log.info("Pizza --> " + pizza.toString());
         }
