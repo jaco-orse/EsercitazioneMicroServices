@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: RESTAURANT-SERVICE
+  #Le proprieta di configurazione sono state spostate al service Config
+  config:
+    import: optional:configserver:http://localhost:8888/config
+  profiles:
+    active: default
