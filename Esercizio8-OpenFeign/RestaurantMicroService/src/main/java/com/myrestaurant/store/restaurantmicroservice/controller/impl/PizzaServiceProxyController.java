@@ -1,6 +1,7 @@
 package com.myrestaurant.store.restaurantmicroservice.controller.impl;
 
 import com.myrestaurant.store.restaurantmicroservice.dto.RestaurantIdsDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

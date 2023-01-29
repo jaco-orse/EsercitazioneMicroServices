@@ -8,6 +8,7 @@ import com.myrestaurant.store.restaurantmicroservice.mapper.RestaurantMapper;
 import com.myrestaurant.store.restaurantmicroservice.model.Restaurant;
 import com.myrestaurant.store.restaurantmicroservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
