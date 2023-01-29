@@ -21,7 +21,7 @@ public interface RestaurantController {
     //List<RestaurantIdsDTO> è una lista di elementi con id_ristorante e id_pizza
 
     @ApiOperation("Find all pizzas by restaurant id")
-    public List<Object> getPizzasByRestaurant(@PathVariable("id") Long restaurantId);
+    public ResponseEntity<?> getPizzasByRestaurant(@PathVariable("id") Long restaurantId);
 
     @ApiOperation("Add new restaurant") //tag di swagger
     public RestaurantDTO save(@RequestBody RestaurantDTO restaurantDTO);

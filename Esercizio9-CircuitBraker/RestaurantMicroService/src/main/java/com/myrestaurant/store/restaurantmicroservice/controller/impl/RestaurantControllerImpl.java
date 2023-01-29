@@ -40,41 +40,41 @@ public class RestaurantControllerImpl implements RestaurantController {
     @Override
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("addPizzas")
-    //@CircuitBreaker
     @CircuitBreaker(name = "addPizzasToRestaurantBreaker", fallbackMethod = "addPizzaToRestaurantFailed")
     public ResponseEntity<?> addPizzaToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS){
         //CHIAMATA SINCRONA
-        RestTemplate restTemplate = new RestTemplate();
-        //try {
-            List<Object> result = List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS, Object[].class)));
-        //}catch (Exception e){
-        //    System.out.println("FAIL TO CONNECT");
-        //}
+        //RestTemplate restTemplate = new RestTemplate();
+        //List<Object> result = List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS, Object[].class)));
 
         //CHIAMATA ASINCRONA CON MESSAGE BROKER
         //restaurantService.addPizzasToRestaurant(restaurantIdsDTOS);
 
         //CHIAMATA SINCRONA CON OPEN FEIGN
-        //pizzaServiceProxyController.addPizzasToRestaurant(restaurantIdsDTOS);
+        pizzaServiceProxyController.addPizzasToRestaurant(restaurantIdsDTOS);
         return new ResponseEntity<>("Chiamata a PizzaService effettuata",HttpStatus.OK);
     }
 
     public ResponseEntity<?> addPizzaToRestaurantFailed(Exception e){
-        return new ResponseEntity<>("CircuitBreaker fallback --> PizzaService non contattatible",HttpStatus.SERVICE_UNAVAILABLE);
+        return new ResponseEntity<>("addPizzasToRestaurant CircuitBreaker fallback --> PizzaService non contattatible per aggiungere le pizze",HttpStatus.SERVICE_UNAVAILABLE);
     }
-
 
     @Override
     @GetMapping("/pizzas/{id}")
-    public List<Object> getPizzasByRestaurant(@PathVariable("id") Long restaurantId) {
+    @CircuitBreaker(name = "getPizzasByRestaurantBreaker", fallbackMethod = "getPizzasByRestaurantFailed")
+    public ResponseEntity<List<Object>> getPizzasByRestaurant(@PathVariable("id") Long restaurantId) {
         //CHIAMATA SINCRONA
         //RestTemplate restTemplate = new RestTemplate();
         //List<Object> result = List.of(Objects.requireNonNull(restTemplate.getForObject(pizzaServiceUrl + "/" + restaurantId, Object[].class)));
 
         //CHIAMA SINCRONA OPEN FEIGN
         List<Object> result = pizzaServiceProxyController.findPizzaByRestaurant(restaurantId);
-        return result;
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
+
+    public ResponseEntity<?> getPizzasByRestaurantFailed(Exception e){
+        return new ResponseEntity<>("getPizzasByRestaurant CircuitBreaker fallback --> PizzaService non contattatible per prendere le pizze",HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
 
     @Override
     @PostMapping
