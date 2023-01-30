@@ -1,7 +1,10 @@
 -La versione finale dell'esercizio si trova nella cartella 'EsercizioVersioneFinale'.
 
--NOTE : 
-
+-NOTE 1: 
+    --> ConfigRepo.rar contiene i file di configurazione. Estrarre la cartella prima di runnare il progetto.
+    --> Cambiare ConfigService .yaml file per puntare alla cartella corretta di ConfigRepo.
+    
+-NOTE 2: 
     --> richiede RabbitMQ server in funzione sulla porta di default ( 5672 )
     --> richiede ZipKin in funzione sulla porta 9411
 
