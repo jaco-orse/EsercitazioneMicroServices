@@ -1,8 +1,9 @@
 -La versione finale dell'esercizio si trova nella cartella 'EsercizioVersioneFinale'.
--Il progetto richiede la presenza di : 
 
-    --> RabbitMQ server in funzione sulla porta di default ( 5672 )
-    --> ZipKin in funzione sulla porta 9411
+-NOTE : 
+
+    --> richiede RabbitMQ server in funzione sulla porta di default ( 5672 )
+    --> richiede ZipKin in funzione sulla porta 9411
 
 -Descrizione generale della comunicazione tra microservizi:
 
