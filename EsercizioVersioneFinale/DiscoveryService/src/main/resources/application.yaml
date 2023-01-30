@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: DISCOVERY-SERVICE
+
+server:
+  port: 8761
+  # la porta di default è la 8761, poteva essere omessa
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
